@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>Fishing Nets</name>
+  <author>Sam</author>
+  <packageId>GT.Sam.FishingNets</packageId>
+  <description>A simple mod that adds fishing nets.</description>
+  <url>https://ludeon.com/forums/index.php?topic=5509.0</url>
+  <supportedVersions>
+    <li>1.0</li>
+    <li>1.1</li>
+    <li>1.2</li>
+  </supportedVersions>
+</ModMetaData>
