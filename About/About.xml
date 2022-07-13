@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
   <name>Fishing Nets (Continued)</name>
   <packageId>Mlie.FishingNets</packageId>
@@ -12,20 +12,24 @@
   </supportedVersions>
   <modDependencies />
   <loadAfter />
-  <description>[img]https://i.imgur.com/WAEzk68.png[/img]
+  <description>[img]https://i.imgur.com/buuPQel.png[/img]
 Update of Sams mod
 https://steamcommunity.com/sharedfiles/filedetails/?id=1529981982
 
-[img]https://i.imgur.com/7Gzt3Rg.png[/img]
+[img]https://i.imgur.com/pufA0kM.png[/img]
 
 [table]
     [tr]
         [td][url=https://invite.gg/Mlie][img]https://i.imgur.com/zdzzBrc.png[/img][/url][/td]
         [td][url=https://github.com/emipa606/FishingNets][img]https://i.imgur.com/kTkpTOE.png[/img][/url][/td]
     [/tr]
+    [tr]
+        [td][img]https://i.imgur.com/WjDSfUn.png[/img][/td]
+        [td][img]https://i.imgur.com/Be8E2qJ.png[/img][/td]
+    [/tr]
 [/table]
 	
-[img]https://i.imgur.com/NOW7jU1.png[/img]
+[img]https://i.imgur.com/Z4GOv8H.png[/img]
 [h1]About[/h1]
 A simple mod that adds the ability to catch fish from rivers, lakes and oceans. There are several tiers of fishing nets that catch fish over time. Fishing nets also occasionally break, with basic wooden fishing nets only lasting a couple of days.
 
@@ -44,12 +48,7 @@ In addition there is an option to build a fishing net on ice, to reap the benefi
 
 [url=https://ludeon.com/forums/index.php?topic=5509.0]Forum[/url]
 
-[h1]Support Me[/h1]
-[url=https://www.patreon.com/SamModding?fan_landing=true][img]https://i.imgur.com/0oRR88M.png[/img][/url]
-[url=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=A4SJD23YR8YFL&amp;source=url][img]https://i.imgur.com/diECfq3.gif[/img][/url]
-[url=https://discord.gg/dXByEJN][img]https://i.imgur.com/6l6budi.png[/img][/url]
-
-[img]https://i.imgur.com/Rs6T6cr.png[/img]
+[img]https://i.imgur.com/PwoNOj4.png[/img]
 [list]
 [*] See if the the error persists if you just have this mod and its requirements active.
 [*] If not, try adding your other mods until it happens again.
@@ -60,4 +59,3 @@ In addition there is an option to build a fishing net on ice, to reap the benefi
 [/list]
 </description>
 </ModMetaData>
-
