@@ -1,13 +1,12 @@
 ﻿using RimWorld;
 using Verse;
 
-namespace GTU_Processor
-{
-    [DefOf]
-    public static class JobDefOf
-    {
-        public static JobDef FillGTProcessor;
+namespace GTU_Processor;
 
-        public static JobDef EmptyGTProcessor;
-    }
+[DefOf]
+public static class JobDefOf
+{
+    public static JobDef FillGTProcessor;
+
+    public static JobDef EmptyGTProcessor;
 }

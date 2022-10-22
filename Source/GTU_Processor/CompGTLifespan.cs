@@ -1,109 +1,108 @@
 ﻿using RimWorld;
 using Verse;
 
-namespace GTU_Processor
+namespace GTU_Processor;
+
+public class CompGTLifespan : ThingComp
 {
-    public class CompGTLifespan : ThingComp
+    private int tickInterval;
+    private int ticksRemaining;
+
+    public CompProperties_GTLifespan Props => (CompProperties_GTLifespan)props;
+
+    public override void PostExposeData()
     {
-        private int tickInterval;
-        private int ticksRemaining;
+        base.PostExposeData();
+        Scribe_Values.Look(ref ticksRemaining, "ticksRemaining");
+    }
 
-        public CompProperties_GTLifespan Props => (CompProperties_GTLifespan) props;
-
-        public override void PostExposeData()
+    public override void PostSpawnSetup(bool respawningAfterLoad)
+    {
+        if (!respawningAfterLoad)
         {
-            base.PostExposeData();
-            Scribe_Values.Look(ref ticksRemaining, "ticksRemaining");
+            ResetTicksRemaining();
         }
+    }
 
-        public override void PostSpawnSetup(bool respawningAfterLoad)
+    public override void CompTickRare()
+    {
+        TickInterval(250);
+    }
+
+    private void TickInterval(int interval)
+    {
+        if (ticksRemaining > 0)
         {
-            if (!respawningAfterLoad)
+            ticksRemaining -= interval;
+        }
+        else
+        {
+            if (Props.killAtEnd)
             {
-                ResetTicksRemaining();
-            }
-        }
-
-        public override void CompTickRare()
-        {
-            TickInterval(250);
-        }
-
-        private void TickInterval(int interval)
-        {
-            if (ticksRemaining > 0)
-            {
-                ticksRemaining -= interval;
-            }
-            else
-            {
-                if (Props.killAtEnd)
-                {
-                    TryToKill();
-                }
-                else
-                {
-                    TryToEnd();
-                }
-
-                ResetTicksRemaining();
-            }
-        }
-
-        private void TryToEnd()
-        {
-            ShowEndMessage();
-            parent.Destroy();
-        }
-
-        private void TryToKill()
-        {
-            ShowEndMessage();
-            parent.Kill();
-        }
-
-        private void ShowEndMessage()
-        {
-            if (!Props.showMessageIfOwned)
-            {
-                return;
-            }
-
-            if (Props.expiredMessage == null)
-            {
-                Messages.Message(parent.Label + " has expired.".CapitalizeFirst(), parent,
-                    MessageTypeDefOf.NeutralEvent, false);
+                TryToKill();
             }
             else
             {
-                Messages.Message(Props.expiredMessage, parent, MessageTypeDefOf.NeutralEvent, false);
+                TryToEnd();
             }
-        }
 
-        private void ResetTicksRemaining()
+            ResetTicksRemaining();
+        }
+    }
+
+    private void TryToEnd()
+    {
+        ShowEndMessage();
+        parent.Destroy();
+    }
+
+    private void TryToKill()
+    {
+        ShowEndMessage();
+        parent.Kill();
+    }
+
+    private void ShowEndMessage()
+    {
+        if (!Props.showMessageIfOwned)
         {
-            ticksRemaining = Props.lifetimeRange.RandomInRange;
-            tickInterval = ticksRemaining;
+            return;
         }
 
-        public override string CompInspectStringExtra()
+        if (Props.expiredMessage == null)
         {
-            string str;
-            if (!Props.writeTimeLeft)
-            {
-                return null;
-            }
-
-            if (ticksRemaining > 0)
-            {
-                str = Props.endVerb + " in " + ticksRemaining.ToStringTicksToPeriod();
-            }
-            else
-            {
-                str = "Expired";
-            }
-
-            return str;
+            Messages.Message(parent.Label + " has expired.".CapitalizeFirst(), parent,
+                MessageTypeDefOf.NeutralEvent, false);
         }
+        else
+        {
+            Messages.Message(Props.expiredMessage, parent, MessageTypeDefOf.NeutralEvent, false);
+        }
+    }
+
+    private void ResetTicksRemaining()
+    {
+        ticksRemaining = Props.lifetimeRange.RandomInRange;
+        tickInterval = ticksRemaining;
+    }
+
+    public override string CompInspectStringExtra()
+    {
+        string str;
+        if (!Props.writeTimeLeft)
+        {
+            return null;
+        }
+
+        if (ticksRemaining > 0)
+        {
+            str = $"{Props.endVerb} in {ticksRemaining.ToStringTicksToPeriod()}";
+        }
+        else
+        {
+            str = "Expired";
+        }
+
+        return str;
     }
 }

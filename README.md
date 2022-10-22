@@ -1,14 +1,14 @@
 # FishingNets
 
-![Image](https://i.imgur.com/WAEzk68.png)
+![Image](https://i.imgur.com/buuPQel.png)
 
 Update of Sams mod
 https://steamcommunity.com/sharedfiles/filedetails/?id=1529981982
 
-![Image](https://i.imgur.com/7Gzt3Rg.png)
+![Image](https://i.imgur.com/pufA0kM.png)
 
 	
-![Image](https://i.imgur.com/NOW7jU1.png)
+![Image](https://i.imgur.com/Z4GOv8H.png)
 
 # About
 
@@ -32,16 +32,7 @@ https://github.com/sam23694/FishingNets/releases]All versions
 
 https://ludeon.com/forums/index.php?topic=5509.0]Forum
 
-# Support Me
-
-https://www.patreon.com/SamModding?fan_landing=true]![Image](https://i.imgur.com/0oRR88M.png)
-
-https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=A4SJD23YR8YFL&amp;source=url]![Image](https://i.imgur.com/diECfq3.gif)
-
-https://discord.gg/dXByEJN]![Image](https://i.imgur.com/6l6budi.png)
-
-
-![Image](https://i.imgur.com/Rs6T6cr.png)
+![Image](https://i.imgur.com/PwoNOj4.png)
 
 
 
@@ -51,6 +42,7 @@ https://discord.gg/dXByEJN]![Image](https://i.imgur.com/6l6budi.png)
 -  For best support, please use the Discord-channel for error-reporting.
 -  Do not report errors by making a discussion-thread, I get no notification of that.
 -  If you have the solution for a problem, please post it to the GitHub repository.
+
 
 
 
