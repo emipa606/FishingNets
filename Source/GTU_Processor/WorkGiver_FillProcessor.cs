@@ -55,12 +55,7 @@ public class WorkGiver_FillProcessor : WorkGiver_Scanner
 
     private Thing FindIngredient(Pawn pawn, ThingWithComps processor)
     {
-        var unused = processor.GetComp<CompGTProcessor>();
-
-        bool Predicate(Thing x)
-        {
-            return !x.IsForbidden(pawn) && pawn.CanReserve(x);
-        }
+        _ = processor.GetComp<CompGTProcessor>();
 
         var position = pawn.Position;
         var map = pawn.Map;
@@ -69,5 +64,10 @@ public class WorkGiver_FillProcessor : WorkGiver_Scanner
         var traverseParms = TraverseParms.For(pawn);
         var validator = (Predicate<Thing>)Predicate;
         return GenClosest.ClosestThingReachable(position, map, thingReq, peMode, traverseParms, 9999f, validator);
+
+        bool Predicate(Thing x)
+        {
+            return !x.IsForbidden(pawn) && pawn.CanReserve(x);
+        }
     }
 }

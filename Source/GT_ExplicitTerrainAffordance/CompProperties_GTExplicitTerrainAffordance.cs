@@ -5,8 +5,8 @@ namespace GT_ExplicitTerrainAffordance;
 
 internal class CompProperties_GTExplicitTerrainAffordance : CompProperties
 {
-    public List<TerrainAffordanceDef> requiredAffordances = null;
-    public List<TerrainDef> requiredTerrains = null;
+    public readonly List<TerrainAffordanceDef> requiredAffordances = null;
+    public readonly List<TerrainDef> requiredTerrains = null;
 
     public CompProperties_GTExplicitTerrainAffordance()
     {

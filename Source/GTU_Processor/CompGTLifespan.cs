@@ -88,21 +88,11 @@ public class CompGTLifespan : ThingComp
 
     public override string CompInspectStringExtra()
     {
-        string str;
         if (!Props.writeTimeLeft)
         {
             return null;
         }
 
-        if (ticksRemaining > 0)
-        {
-            str = $"{Props.endVerb} in {ticksRemaining.ToStringTicksToPeriod()}";
-        }
-        else
-        {
-            str = "Expired";
-        }
-
-        return str;
+        return ticksRemaining > 0 ? $"{Props.endVerb} in {ticksRemaining.ToStringTicksToPeriod()}" : "Expired";
     }
 }
