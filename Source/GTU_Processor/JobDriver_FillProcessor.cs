@@ -11,9 +11,9 @@ public class JobDriver_FillProcessor : JobDriver
 
     private const TargetIndex IngredientInd = TargetIndex.B;
 
-    protected ThingWithComps Processor => (ThingWithComps)job.GetTarget(TargetIndex.A).Thing;
+    private ThingWithComps Processor => (ThingWithComps)job.GetTarget(ProcessorInd).Thing;
 
-    protected Thing Ingredient => job.GetTarget(TargetIndex.B).Thing;
+    private Thing Ingredient => job.GetTarget(IngredientInd).Thing;
 
     public override bool TryMakePreToilReservations(bool errorOnFailed)
     {
@@ -24,26 +24,26 @@ public class JobDriver_FillProcessor : JobDriver
     [DebuggerHidden]
     protected override IEnumerable<Toil> MakeNewToils()
     {
-        this.FailOnDespawnedNullOrForbidden(TargetIndex.A);
-        this.FailOnBurningImmobile(TargetIndex.A);
+        this.FailOnDespawnedNullOrForbidden(ProcessorInd);
+        this.FailOnBurningImmobile(ProcessorInd);
         AddEndCondition(() =>
             !Processor.GetComp<CompGTProcessor>().Full ? JobCondition.Ongoing : JobCondition.Succeeded);
         yield return Toils_General.DoAtomic(delegate
         {
             job.count = Processor.GetComp<CompGTProcessor>().IngredientRequired;
         });
-        var reserveIngredient = Toils_Reserve.Reserve(TargetIndex.B);
+        var reserveIngredient = Toils_Reserve.Reserve(IngredientInd);
         yield return reserveIngredient;
-        yield return Toils_Goto.GotoThing(TargetIndex.B, PathEndMode.ClosestTouch)
-            .FailOnDespawnedNullOrForbidden(TargetIndex.B).FailOnSomeonePhysicallyInteracting(TargetIndex.B);
-        yield return Toils_Haul.StartCarryThing(TargetIndex.B, false, true)
-            .FailOnDestroyedNullOrForbidden(TargetIndex.B);
-        yield return Toils_Haul.CheckForGetOpportunityDuplicate(reserveIngredient, TargetIndex.B, TargetIndex.None,
+        yield return Toils_Goto.GotoThing(IngredientInd, PathEndMode.ClosestTouch)
+            .FailOnDespawnedNullOrForbidden(IngredientInd).FailOnSomeonePhysicallyInteracting(IngredientInd);
+        yield return Toils_Haul.StartCarryThing(IngredientInd, false, true)
+            .FailOnDestroyedNullOrForbidden(IngredientInd);
+        yield return Toils_Haul.CheckForGetOpportunityDuplicate(reserveIngredient, IngredientInd, TargetIndex.None,
             true);
-        yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch);
-        yield return Toils_General.Wait(200).FailOnDestroyedNullOrForbidden(TargetIndex.B)
-            .FailOnDestroyedNullOrForbidden(TargetIndex.A).FailOnCannotTouch(TargetIndex.A, PathEndMode.Touch)
-            .WithProgressBarToilDelay(TargetIndex.A);
+        yield return Toils_Goto.GotoThing(ProcessorInd, PathEndMode.Touch);
+        yield return Toils_General.Wait(200).FailOnDestroyedNullOrForbidden(IngredientInd)
+            .FailOnDestroyedNullOrForbidden(ProcessorInd).FailOnCannotTouch(ProcessorInd, PathEndMode.Touch)
+            .WithProgressBarToilDelay(ProcessorInd);
         yield return new Toil
         {
             initAction = delegate { Processor.GetComp<CompGTProcessor>().AddIngredient(Ingredient); },

@@ -14,9 +14,9 @@ public class JobDriver_EmptyProcessor : JobDriver
 
     private const TargetIndex StorageCellInd = TargetIndex.C;
 
-    protected ThingWithComps Processor => (ThingWithComps)job.GetTarget(TargetIndex.A).Thing;
+    private ThingWithComps Processor => (ThingWithComps)job.GetTarget(ProcessorInd).Thing;
 
-    protected Thing Result => job.GetTarget(TargetIndex.B).Thing;
+    protected Thing Result => job.GetTarget(ResultInd).Thing;
 
     public override bool TryMakePreToilReservations(bool errorOnFailed)
     {
@@ -26,12 +26,12 @@ public class JobDriver_EmptyProcessor : JobDriver
     [DebuggerHidden]
     protected override IEnumerable<Toil> MakeNewToils()
     {
-        this.FailOnDespawnedNullOrForbidden(TargetIndex.A);
-        this.FailOnBurningImmobile(TargetIndex.A);
-        yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch);
-        yield return Toils_General.Wait(200).FailOnDestroyedNullOrForbidden(TargetIndex.A)
-            .FailOnCannotTouch(TargetIndex.A, PathEndMode.Touch)
-            .FailOn(() => !Processor.GetComp<CompGTProcessor>().Completed).WithProgressBarToilDelay(TargetIndex.A);
+        this.FailOnDespawnedNullOrForbidden(ProcessorInd);
+        this.FailOnBurningImmobile(ProcessorInd);
+        yield return Toils_Goto.GotoThing(ProcessorInd, PathEndMode.Touch);
+        yield return Toils_General.Wait(200).FailOnDestroyedNullOrForbidden(ProcessorInd)
+            .FailOnCannotTouch(ProcessorInd, PathEndMode.Touch)
+            .FailOn(() => !Processor.GetComp<CompGTProcessor>().Completed).WithProgressBarToilDelay(ProcessorInd);
         yield return new Toil
         {
             initAction = delegate
@@ -42,8 +42,8 @@ public class JobDriver_EmptyProcessor : JobDriver
                 if (StoreUtility.TryFindBestBetterStoreCellFor(thing, pawn, Map, currentPriority, pawn.Faction,
                         out var c))
                 {
-                    job.SetTarget(TargetIndex.C, c);
-                    job.SetTarget(TargetIndex.B, thing);
+                    job.SetTarget(StorageCellInd, c);
+                    job.SetTarget(ResultInd, thing);
                     job.count = thing.stackCount;
                 }
                 else
@@ -53,12 +53,12 @@ public class JobDriver_EmptyProcessor : JobDriver
             },
             defaultCompleteMode = ToilCompleteMode.Instant
         };
-        yield return Toils_Reserve.Reserve(TargetIndex.B);
-        yield return Toils_Reserve.Reserve(TargetIndex.C);
-        yield return Toils_Goto.GotoThing(TargetIndex.B, PathEndMode.ClosestTouch);
-        yield return Toils_Haul.StartCarryThing(TargetIndex.B);
-        var carryToCell = Toils_Haul.CarryHauledThingToCell(TargetIndex.C);
+        yield return Toils_Reserve.Reserve(ResultInd);
+        yield return Toils_Reserve.Reserve(StorageCellInd);
+        yield return Toils_Goto.GotoThing(ResultInd, PathEndMode.ClosestTouch);
+        yield return Toils_Haul.StartCarryThing(ResultInd);
+        var carryToCell = Toils_Haul.CarryHauledThingToCell(StorageCellInd);
         yield return carryToCell;
-        yield return Toils_Haul.PlaceHauledThingInCell(TargetIndex.C, carryToCell, true);
+        yield return Toils_Haul.PlaceHauledThingInCell(StorageCellInd, carryToCell, true);
     }
 }

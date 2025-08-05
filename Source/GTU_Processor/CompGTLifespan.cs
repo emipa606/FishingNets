@@ -8,7 +8,7 @@ public class CompGTLifespan : ThingComp
     private int tickInterval;
     private int ticksRemaining;
 
-    public CompProperties_GTLifespan Props => (CompProperties_GTLifespan)props;
+    private CompProperties_GTLifespan Props => (CompProperties_GTLifespan)props;
 
     public override void PostExposeData()
     {

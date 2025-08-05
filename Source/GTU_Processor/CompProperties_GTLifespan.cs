@@ -9,7 +9,7 @@ public class CompProperties_GTLifespan : CompProperties
     public readonly string expiredMessage = null;
     public bool killAtEnd;
 
-    public IntRange lifetimeRange = new IntRange(100, 100);
+    public IntRange lifetimeRange = new(100, 100);
 
     public bool showMessageIfOwned;
 

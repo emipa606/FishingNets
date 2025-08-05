@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <!-- EN: empty processor -->
+  <EmptyGTProcessor.label>empty processor</EmptyGTProcessor.label>
+  <!-- EN: emptying from -->
+  <EmptyGTProcessor.gerund>emptying from</EmptyGTProcessor.gerund>
+  <!-- EN: empty fishing net -->
+  <EmptyGTProcessor.verb>empty fishing net</EmptyGTProcessor.verb>
+  <!-- EN: fill processor -->
+  <FillGTProcessor.label>fill processor</FillGTProcessor.label>
+  <!-- EN: filling -->
+  <FillGTProcessor.gerund>filling</FillGTProcessor.gerund>
+  <!-- EN: fill -->
+  <FillGTProcessor.verb>fill</FillGTProcessor.verb>
+</LanguageData>

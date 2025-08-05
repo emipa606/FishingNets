@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <!-- EN: emptying TargetA. -->
+  <EmptyGTProcessor.reportString>emptying TargetA.</EmptyGTProcessor.reportString>
+  <!-- EN: filling TargetA. -->
+  <FillGTProcessor.reportString>filling TargetA.</FillGTProcessor.reportString>
+</LanguageData>

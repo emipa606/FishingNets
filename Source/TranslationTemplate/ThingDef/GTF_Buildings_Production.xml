@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <!-- EN: advanced fishing net -->
+  <GTF_FishingNetAdvanced.label>advanced fishing net</GTF_FishingNetAdvanced.label>
+  <!-- EN: An advanced fishing net for catching large amounts of fish in deeper water. More durable and equipped with sensors and electronic lures. -->
+  <GTF_FishingNetAdvanced.description>An advanced fishing net for catching large amounts of fish in deeper water. More durable and equipped with sensors and electronic lures.</GTF_FishingNetAdvanced.description>
+  <!-- EN: A fish net has broken. -->
+  <GTF_FishingNetAdvanced.comps.CompGTLifespan.expiredMessage>A fish net has broken.</GTF_FishingNetAdvanced.comps.CompGTLifespan.expiredMessage>
+  <!-- EN: simple fishing net -->
+  <GTF_FishingNetBasic.label>simple fishing net</GTF_FishingNetBasic.label>
+  <!-- EN: A simple wooden fishing net for catching fish in shallow water. Not very strong and prone to breaking. -->
+  <GTF_FishingNetBasic.description>A simple wooden fishing net for catching fish in shallow water. Not very strong and prone to breaking.</GTF_FishingNetBasic.description>
+  <!-- EN: A fish net has broken. -->
+  <GTF_FishingNetBasic.comps.CompGTLifespan.expiredMessage>A fish net has broken.</GTF_FishingNetBasic.comps.CompGTLifespan.expiredMessage>
+  <!-- EN: complex fishing net -->
+  <GTF_FishingNetComplex.label>complex fishing net</GTF_FishingNetComplex.label>
+  <!-- EN: A complex fishing net for catching fish in shallow water and chest deep water. More durable and better at trapping fish. -->
+  <GTF_FishingNetComplex.description>A complex fishing net for catching fish in shallow water and chest deep water. More durable and better at trapping fish.</GTF_FishingNetComplex.description>
+  <!-- EN: A fish net has broken. -->
+  <GTF_FishingNetComplex.comps.CompGTLifespan.expiredMessage>A fish net has broken.</GTF_FishingNetComplex.comps.CompGTLifespan.expiredMessage>
+  <!-- EN: ice fishing net -->
+  <GTF_FishingNetIce.label>ice fishing net</GTF_FishingNetIce.label>
+  <!-- EN: A unique fishing net designed to catch fish under the ice. -->
+  <GTF_FishingNetIce.description>A unique fishing net designed to catch fish under the ice.</GTF_FishingNetIce.description>
+  <!-- EN: A fish net has broken. -->
+  <GTF_FishingNetIce.comps.CompGTLifespan.expiredMessage>A fish net has broken.</GTF_FishingNetIce.comps.CompGTLifespan.expiredMessage>
+</LanguageData>

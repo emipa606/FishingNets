@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/.github/">
+    <File Path="../.github/copilot-instructions.md" />
+  </Folder>
+  <Configurations>
+    <BuildType Name="Release" />
+  </Configurations>
+  <Project Path="GTU_Processor/GTU_Processor.csproj" />
+  <Project Path="GT_Animation/GT_Animation.csproj" />
+  <Project Path="GT_ExplicitTerrainAffordance/GT_ExplicitTerrainAffordance.csproj" />
+</Solution>

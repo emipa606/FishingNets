@@ -13,7 +13,7 @@ public class CompProperties_GTProcessor : CompProperties
     public readonly string workVerb = "Processing";
 
     public readonly string workVerbPast = "Processed";
-    public IntRange durationIntervalRange = new IntRange(100, 100);
+    public IntRange durationIntervalRange = new(100, 100);
 
     public bool requiresPower;
 

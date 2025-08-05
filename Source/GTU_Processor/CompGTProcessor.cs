@@ -80,12 +80,57 @@ public class CompGTProcessor : ThingComp
         }
     }
 
+    private ThingDef thingToSpawn()
+    {
+        var tmpCatches = new List<Thing>();
+        tmpCatches.Clear();
+        if (!ModsConfig.OdysseyActive)
+        {
+            return Props.thingResult;
+        }
+
+        var waterBody = parent.Position.GetWaterBody(parent.Map);
+        if (waterBody == null || waterBody.waterBodyType == WaterBodyType.None)
+        {
+            return Props.thingResult;
+        }
+
+        ThingDef result = null;
+        if (!Rand.Chance(FishingUtility.PollutionToxfishChanceCurve.Evaluate(waterBody.PollutionPct)))
+        {
+            if (parent.Map.Biome.fishTypes.rareCatchesSetMaker != null &&
+                (DebugSettings.alwaysRareCatches || parent.Map.waterBodyTracker.lastRareCatchTick == 0 ||
+                 GenTicks.TicksGame - parent.Map.waterBodyTracker.lastRareCatchTick > 300000) && Rand.Chance(0.01f))
+            {
+                tmpCatches.AddRange(parent.Map.Biome.fishTypes.rareCatchesSetMaker.root.Generate());
+                if (tmpCatches.Any())
+                {
+                    return tmpCatches.RandomElement().def;
+                }
+            }
+
+            if ((!Rand.Chance(0.05f) || !waterBody.UncommonFish.TryRandomElement(out result)) &&
+                !waterBody.CommonFishIncludingExtras.TryRandomElement(out result) && tmpCatches.Any())
+            {
+                return tmpCatches.RandomElement().def;
+            }
+        }
+        else
+        {
+            return ThingDefOf.Fish_Toxfish;
+        }
+
+        return result ?? Props.thingResult;
+    }
+
     private bool AttemptSpawn()
     {
         if (ticksRemaining > 0)
         {
             return false;
         }
+
+        var thingToSpawn = this.thingToSpawn();
 
         if (Props.spawnMaxAdjacent >= 0)
         {
@@ -101,7 +146,7 @@ public class CompGTProcessor : ThingComp
                 var thingList = c.GetThingList(parent.Map);
                 foreach (var thing in thingList)
                 {
-                    if (thing.def != Props.thingResult)
+                    if (thing.def != thingToSpawn)
                     {
                         continue;
                     }
@@ -120,28 +165,27 @@ public class CompGTProcessor : ThingComp
             return false;
         }
 
+        var makeThing = ThingMaker.MakeThing(thingToSpawn);
+        makeThing.stackCount = Props.resultCount;
+        GenPlace.TryPlaceThing(makeThing, center, parent.Map, ThingPlaceMode.Direct, out var t);
+        if (Props.spawnForbidden)
         {
-            var thing = ThingMaker.MakeThing(Props.thingResult);
-            thing.stackCount = Props.resultCount;
-            GenPlace.TryPlaceThing(thing, center, parent.Map, ThingPlaceMode.Direct, out var t);
-            if (Props.spawnForbidden)
-            {
-                t.SetForbidden(true);
-            }
-
-            if (Props.showMessageIfOwned && parent.Faction == Faction.OfPlayer)
-            {
-                Messages.Message(
-                    "MessageCompSpawnerSpawnedItem".Translate(Props.thingResult.LabelCap).CapitalizeFirst(), thing,
-                    MessageTypeDefOf.PositiveEvent);
-            }
-
-            return true;
+            t.SetForbidden(true);
         }
+
+        if (Props.showMessageIfOwned && parent.Faction == Faction.OfPlayer)
+        {
+            Messages.Message(
+                "MessageCompSpawnerSpawnedItem".Translate(thingToSpawn.LabelCap).CapitalizeFirst(), makeThing,
+                MessageTypeDefOf.PositiveEvent);
+        }
+
+        return true;
     }
 
     private bool TryFindSpawnCell(out IntVec3 result)
     {
+        var thingToSpawn = this.thingToSpawn();
         foreach (var current in GenAdj.CellsAdjacent8Way(parent).InRandomOrder())
         {
             if (!current.Walkable(parent.Map))
@@ -150,7 +194,7 @@ public class CompGTProcessor : ThingComp
             }
 
             var edifice = current.GetEdifice(parent.Map);
-            if (edifice != null && Props.thingResult.IsEdifice())
+            if (edifice != null && thingToSpawn.IsEdifice())
             {
                 continue;
             }
@@ -170,8 +214,8 @@ public class CompGTProcessor : ThingComp
             var thingList = current.GetThingList(parent.Map);
             foreach (var thing in thingList)
             {
-                if (thing.def.category != ThingCategory.Item || thing.def == Props.thingResult &&
-                    thing.stackCount <= Props.thingResult.stackLimit -
+                if (thing.def.category != ThingCategory.Item || thing.def == thingToSpawn &&
+                    thing.stackCount <= thingToSpawn.stackLimit -
                     Props.resultCount)
                 {
                     continue;
@@ -202,13 +246,13 @@ public class CompGTProcessor : ThingComp
             return null;
         }
 
-        var thing = ThingMaker.MakeThing(Props.thingResult);
+        var thing = ThingMaker.MakeThing(thingToSpawn());
         thing.stackCount = Props.resultCount;
         ResetTicksRemaining();
         return thing;
     }
 
-    public void AddIngredient(int count)
+    private void AddIngredient(int count)
     {
         if (Full)
         {

@@ -37,7 +37,7 @@ public class Graphic_Animated : Graphic_Collection
         return thing == null ? MatSingle : SubGraphicFor(thing).MatSingle;
     }
 
-    public Graphic SubGraphicFor(Thing thing)
+    private Graphic SubGraphicFor(Thing thing)
     {
         return thing == null ? subGraphics[0] : subGraphics[thing.thingIDNumber % subGraphics.Length];
     }
