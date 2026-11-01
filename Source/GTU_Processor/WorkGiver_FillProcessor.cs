@@ -59,7 +59,7 @@ public class WorkGiver_FillProcessor : WorkGiver_Scanner
 
         var position = pawn.Position;
         var map = pawn.Map;
-        var thingReq = ThingRequest.ForDef(ThingDefOf.WoodLog); //comp.Props.thingIngredient);
+        var thingReq = ThingRequest.ForDef(ThingDefOf.WoodLog);
         var peMode = PathEndMode.ClosestTouch;
         var traverseParms = TraverseParms.For(pawn);
         var validator = (Predicate<Thing>)Predicate;

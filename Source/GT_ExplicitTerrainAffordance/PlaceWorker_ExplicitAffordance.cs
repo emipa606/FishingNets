@@ -8,15 +8,10 @@ public class PlaceWorker_ExplicitAffordance : PlaceWorker
         Thing thingToIgnore = null, Thing thing = null)
     {
         var comp = ((ThingDef)checkingDef).GetCompProperties<CompProperties_GTExplicitTerrainAffordance>();
-        if (comp.requiredAffordances != null)
+        if (comp.requiredAffordances != null && comp.requiredAffordances.Any(terrrainAffordance =>
+                map.terrainGrid.TerrainAt(loc).affordances.Contains(terrrainAffordance)))
         {
-            foreach (var terrainAffordanceDef in comp.requiredAffordances)
-            {
-                if (map.terrainGrid.TerrainAt(loc).affordances.Contains(terrainAffordanceDef))
-                {
-                    return true;
-                }
-            }
+            return true;
         }
 
         if (comp.requiredTerrains == null)
@@ -24,12 +19,9 @@ public class PlaceWorker_ExplicitAffordance : PlaceWorker
             return "TerrainCannotSupport".Translate();
         }
 
-        foreach (var terrainDef in comp.requiredTerrains)
+        if (comp.requiredTerrains.Any(terrain => map.terrainGrid.TerrainAt(loc) == terrain))
         {
-            if (map.terrainGrid.TerrainAt(loc) == terrainDef)
-            {
-                return true;
-            }
+            return true;
         }
 
         return "TerrainCannotSupport".Translate();

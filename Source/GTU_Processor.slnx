@@ -8,4 +8,22 @@
   <Project Path="GTU_Processor/GTU_Processor.csproj" />
   <Project Path="GT_Animation/GT_Animation.csproj" />
   <Project Path="GT_ExplicitTerrainAffordance/GT_ExplicitTerrainAffordance.csproj" />
+  <Folder Name="/XML/1.7/Defs/JobDefs/">
+    <File Path="../1.7/Defs/JobDefs/Jobs_FishingNets.xml" />
+  </Folder>
+  <Folder Name="/XML/1.7/Defs/ThingDefs_Buildings/">
+    <File Path="../1.7/Defs/ThingDefs_Buildings/GTF_Buildings_Production.xml" />
+  </Folder>
+  <Folder Name="/XML/1.7/Defs/ThingDefs_Items/">
+    <File Path="../1.7/Defs/ThingDefs_Items/GTF_Items_Resource_Fish.xml" />
+  </Folder>
+  <Folder Name="/XML/1.7/Defs/ResearchProjectDefs/">
+    <File Path="../1.7/Defs/ResearchProjectDefs/GTF_ResearchProjects.xml" />
+  </Folder>
+  <Folder Name="/XML/About/">
+    <File Path="../About/about.xml" />
+  </Folder>
+  <Folder Name="/XML/1.7/Defs/WorkGiverDefs/">
+    <File Path="../1.7/Defs/WorkGiverDefs/GTF_WorkGivers.xml" />
+  </Folder>
 </Solution>
